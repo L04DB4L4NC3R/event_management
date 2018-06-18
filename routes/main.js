@@ -3,7 +3,6 @@ const users = require("../db/model");
 const jwt = require("jsonwebtoken");
 const hash = require("../helpers/hash").hash;
 const compare = require("../helpers/hash").compare;
-const secret = require("../secret");
 
 router.get("/",(req,res)=>{
     res.render("index")

@@ -1,6 +1,5 @@
 const bcrypt = require("bcrypt");
 const util = require("util");
-const secret = require("../secret");
 
 bcrypt.hash = util.promisify(bcrypt.hash);
 bcrypt.compare = util.promisify(bcrypt.compare);
