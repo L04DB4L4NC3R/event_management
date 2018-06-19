@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const users = require("../db/model");
+const users = require("../db/model").users;
 const jwt = require("jsonwebtoken");
 const hash = require("../helpers/hash").hash;
 const compare = require("../helpers/hash").compare;
@@ -9,19 +9,21 @@ const compare = require("../helpers/hash").compare;
 
 router.post("/login", async (req,res,next)=>{
     if(req.body.name==="" || req.body.passwd==="")
-        res.send("Empty fields")
+        next("Empty fields");
+
     var user = await users.findOne({name:req.body.name});
 
     compare(req.body.passwd,user.passwd)
     .then((bool)=>{
+    
         if(user && bool )
             {
                 jwt.sign({user},process.env.SECRET_KEY,(err,token)=>{
                     if(err)
                         next(err)
-                    req.session.name = user.name;
-                    res.json({token:token,name:req.session.name});
-                })
+                    console.log(token);
+                    res.json({token:token,name:user.name});
+                });
             }
         else
             next("name or password entered is wrong, please try again");
@@ -63,8 +65,7 @@ router.post("/login", async (req,res,next)=>{
                     jwt.sign({user:o},process.env.SECRET_KEY,{expiresIn:"2d"},(err,token)=>{
                         if(err)
                             next(err)
-                        req.session.name = o.name;
-                        res.json({token:token,name:req.session.name});
+                        res.json({token:token,name:user.name});
                     });
                 })
                 .catch(err=>next(err));

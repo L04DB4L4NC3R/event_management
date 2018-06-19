@@ -1,15 +1,16 @@
 const mongoose = require("mongoose");
 
+/*
+*   @description: User schema
+*/ 
+
 const event = new mongoose.Schema({
     name:String,
     description:String,
     artist:String,
-    date:{
-        type:Date,
-        default:Date.now()
-    },
+    date:String,
     time:String,
-    pending:Boolean
+    address:String
 
 });
 
@@ -21,6 +22,30 @@ const schema = new mongoose.Schema({
 
 
 
-const model = mongoose.model("user",schema);
+/*
+*   @description: Artist schema
+*/
 
-module.exports = model;
+
+const booking = new mongoose.Schema({
+    user:String,
+    description:String,
+    date:String,
+    time:String,
+    address:String
+});
+
+
+const artists = new mongoose.Schema({
+    name:String,
+    type:String,
+    bookings:[booking]
+
+});
+
+
+const model = mongoose.model("user",schema);
+const art = mongoose.model("artist",artists);
+
+module.exports.users = model;
+module.exports.artists = art;
