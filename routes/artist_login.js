@@ -85,7 +85,7 @@ router.get("/main",verify,(req,res,next)=>{
    artists.findOne({_id:req.data.artist._id})
    .then((artist)=>{
        if(artist)
-           res.json({bookings:artist});     
+           res.json({bookings:artist.bookings});     
        else
             next("Artist not found");
     }).catch(err=>next(err));

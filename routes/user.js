@@ -12,7 +12,7 @@ const users = require("../db/model").users;
 
 router.post("/search",verify,(req,res,next)=>{
     
-    artists.find({name:req.body.name},{passwd:0})
+    artists.find({name:req.body.name},{passwd:0,bookings:0})
     .then((data)=>{
         res.json({data});
     }).catch(err=>next(err));
