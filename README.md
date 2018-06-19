@@ -11,3 +11,4 @@ ___
 
 |  Route    |  Type of request  |       Data              |  Response  |
 | --------- |:-----------------:|:-----------------------:|:----------:|
+| /| GET | - | Welcome message |
