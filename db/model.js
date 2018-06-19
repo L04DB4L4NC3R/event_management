@@ -10,7 +10,8 @@ const event = new mongoose.Schema({
     artist:String,
     date:String,
     time:String,
-    address:String
+    address:String,
+    id:String
 
 });
 
@@ -38,6 +39,7 @@ const booking = new mongoose.Schema({
 
 const artists = new mongoose.Schema({
     name:String,
+    passwd:String,
     type:String,
     bookings:[booking]
 

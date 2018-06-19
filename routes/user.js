@@ -12,7 +12,7 @@ const users = require("../db/model").users;
 
 router.post("/search",verify,(req,res,next)=>{
     
-    artists.find({name:req.body.name,type:req.body.type})
+    artists.find({name:req.body.name},{passwd:0})
     .then((data)=>{
         res.json({data});
     }).catch(err=>next(err));
@@ -26,6 +26,7 @@ router.post("/search",verify,(req,res,next)=>{
 *   name:String,
 *   description:String,
 *   artist:String,
+*   id:String,
 *   date:dd/mm/yy,
 *   time:String,
 *   address:String
@@ -43,7 +44,7 @@ router.post("/book",verify,async (req,res,next)=>{
             if(booking.date === req.body.date && booking.time === req.body.time)
                 return next("Artist is booked for the entered date and time");
         }
-
+    
         await users.update({_id:id},{$push:{events:req.body}});
         await artists.update({name:req.body.artist},{$push:{bookings:{user:id,description:req.body.description,date:req.body.date,time:req.body.time,address:req.body.address}}});
         return res.json({message:"Event is booked"});
@@ -55,14 +56,15 @@ router.post("/book",verify,async (req,res,next)=>{
 
 
 /*
-*   @description: removing an event via post request (send singer name via get request)
+*   @description: removing an event via get request (send singer id via get request)
 */
 
-router.post("/delete",verify,(req,res,next)=>{
-    users.update({_id:req.data.user._id},{$pull:{events:{artist:req.body.name}}})
+router.get("/delete/:id",verify,(req,res,next)=>{
+    
+    users.update({_id:req.data.user._id},{$pull:{events:{id:req.params.id}}})
     .then(()=>{
-
-       artists.update({name:req.body.name},{$pull:{user:req.data.user._id}})
+        
+       artists.update({_id:req.params.id},{$pull:{bookings:{user:req.data.user._id}}})
        .then(()=>{
         res.json({message:"Event booking cancelled"});
        }).catch(err=>next(err));

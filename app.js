@@ -20,6 +20,7 @@ app.get("/",(req,res,next)=>{
 //routes
 app.use("/user",require("./routes/user_login"));
 app.use("/user",require("./routes/user"));
+app.use("/artist",require("./routes/artist_login"));
 
 app.use(function(err,req,res,next){
     res.send({err});
