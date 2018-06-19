@@ -53,4 +53,22 @@ router.post("/book",verify,async (req,res,next)=>{
     
 });
 
+
+/*
+*   @description: removing an event via post request (send singer name via get request)
+*/
+
+router.post("/delete",verify,(req,res,next)=>{
+    users.update({_id:req.data.user._id},{$pull:{events:{artist:req.body.name}}})
+    .then(()=>{
+
+       artists.update({name:req.body.name},{$pull:{user:req.data.user._id}})
+       .then(()=>{
+        res.json({message:"Event booking cancelled"});
+       }).catch(err=>next(err));
+
+    }).catch(err=>next(err));
+});
+
+
 module.exports = router;

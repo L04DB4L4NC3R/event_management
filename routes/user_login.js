@@ -65,7 +65,8 @@ router.post("/login", async (req,res,next)=>{
                     jwt.sign({user:o},process.env.SECRET_KEY,{expiresIn:"2d"},(err,token)=>{
                         if(err)
                             next(err)
-                        res.json({token:token,name:user.name});
+                        else
+                            res.json({token:token,name:user.name});
                     });
                 })
                 .catch(err=>next(err));

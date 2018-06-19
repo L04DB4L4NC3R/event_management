@@ -18,7 +18,7 @@ app.get("/",(req,res,next)=>{
 });
 
 //routes
-app.use("/auth",require("./routes/login"));
+app.use("/user",require("./routes/user_login"));
 app.use("/user",require("./routes/user"));
 
 app.use(function(err,req,res,next){
