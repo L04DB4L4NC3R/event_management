@@ -66,7 +66,7 @@ router.post("/login", async (req,res,next)=>{
                         if(err)
                             next(err)
                         else
-                            res.json({token:token,name:user.name});
+                            res.json({token:token,name:o.name});
                     });
                 })
                 .catch(err=>next(err));

@@ -64,10 +64,11 @@ router.post("/login", async (req,res,next)=>{
                 obj.save()
                 .then((o)=>{
                     jwt.sign({artist:o},process.env.SECRET_KEY,{expiresIn:"2d"},(err,token)=>{
+                        console.log(token)
                         if(err)
                             next(err)
-                        else
-                            res.json({token:token,name:artist.name});
+                        
+                        return res.json({token:token,name:o.name});
                     });
                 })
                 .catch(err=>next(err));
