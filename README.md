@@ -11,7 +11,7 @@ ___
 
 |  Route    |        Headers           | Type of request  |       Data              |  Response  |
 | --------- |:---------------:|:-----------------:|:-----------------------:|:----------:|
-| /| GET | - |        -          |     Welcome message |
+| /| - | GET |        -          |     Welcome message |
 | /user/login |        -         | POST | {name:String,passwd:String} | {token:String,name:String}|
 | /user/signup |        -        |POST | {name:String,passwd:String,confirm:String} | {token:String,name:String}|
 | /artist/login |        -        | POST | {name:String,passwd:String} | {token:String,name:String}|
