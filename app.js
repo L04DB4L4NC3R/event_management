@@ -1,7 +1,6 @@
 const express = require("express");
 const body_parser = require("body-parser");
 const morgan = require("morgan");
-const session = require("express-session");
 require("dotenv").config();
 require("./db/connect");
 
