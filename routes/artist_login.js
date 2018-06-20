@@ -92,4 +92,14 @@ router.get("/main",verify,(req,res,next)=>{
 });
 
 
+
+router.get("/unregister",verify,(req,res,next)=>{
+    artists.findOneAndRemove({_id:req.data.user._id})
+    .then(()=>{
+        console.log("Artist " + req.data.user._id + " has been unregistered");
+        res.redirect("/");
+    }).catch(err=>next(err));
+});
+
+
 module.exports = router;

@@ -20,3 +20,5 @@ ___
 | /user/search |         Authorization       | POST | {name:String} | {name:String,passwd:String,type:String} | 
 | /user/book |        Authorization      | POST | {name:String,description:String,artist:String,id:String,date:dd/mm/yy,time:String,address:String} | {message:"Event has been booked"}|
 | /user/delete/:id |        Authorization|        GET |  id of artist as GET parameter | {message:"Event booking is cancelled"} |
+| /user/unregister | Authorization | GET |  -  | redirected to welcome page |
+| /artist/unregister | Authorization | GET |  -  | redirected to welcome page  |
