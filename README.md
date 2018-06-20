@@ -16,7 +16,7 @@ ___
 | /user/login |        -         | POST | {name:String,passwd:String} | {token:String,name:String}|
 | /user/signup |        -        |POST | {name:String,passwd:String,confirm:String} | {token:String,name:String}|
 | /artist/login |        -        | POST | {name:String,passwd:String} | {token:String,name:String}|
-| /artist/signup |        -      | POST | {name:String,passwd:String,confirm:String} | {token:String,name:String}|
+| /artist/signup |        -      | POST | {name:String,passwd:String,type:String,rate:Number,location:String} | {token:String,name:String}|
 | /artist/main |        Authorization    | GET | - | {bookings:{user:String,description:String,date:String,time:String,address:String}} | 
 | /user/search |         Authorization       | POST | {query:String} | {name:String,type:String,bookings:[booking]rate:Number,location:String} | 
 | /user/book |        Authorization      | POST | {name:String,description:String,artist:String,id:String,date:dd/mm/yy,time:String,address:String} | {message:"Event has been booked"}|
