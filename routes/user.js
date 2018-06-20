@@ -5,16 +5,22 @@ const users = require("../db/model").users;
 
 /*
 *   @body: {
-*       name:String,
-*       type:String
+*       query:String
 *    } 
 */
 
 router.post("/search",verify,(req,res,next)=>{
     
-    artists.find({name:req.body.name},{passwd:0,bookings:0})
+    artists.find({name:req.body.query},{passwd:0,bookings:0})
     .then((data)=>{
-        res.json({data});
+        if(data)
+            return res.json({data});
+        else{
+            artists.find({type:req.body.query},{passwd:0,bookings:0})
+            .then((data)=>{
+                res.json({data});
+            }).catch(err=>next(err));
+        }
     }).catch(err=>next(err));
 });
 
@@ -69,6 +75,24 @@ router.get("/delete/:id",verify,(req,res,next)=>{
         res.json({message:"Event booking cancelled"});
        }).catch(err=>next(err));
 
+    }).catch(err=>next(err));
+});
+
+
+
+
+/**
+ *  @description List of artists format-
+ * 
+ *      data:[
+ *              {name:String, etc}
+ *              ]
+ */
+
+router.get("/main",(req,res,next)=>{
+    artists.find({},{passwd:0})
+    .then((data)=>{
+        res.json({data});
     }).catch(err=>next(err));
 });
 

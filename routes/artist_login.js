@@ -38,6 +38,15 @@ router.post("/login", async (req,res,next)=>{
 
 
 
+    /**
+     *  body-    {
+    *           name:String,
+    *           passwd:String,
+    *           type:String,
+    *           rate:Number,
+    *           location:String
+    *           }   
+     */
 
 
     router.post("/signup",async (req,res,next)=>{
@@ -58,7 +67,10 @@ router.post("/login", async (req,res,next)=>{
                 var obj = new artists({
                     name:req.body.name,
                     passwd:h,
-                    bookings:[]
+                    bookings:[],
+                    type:req.body.type,
+                    rate:req.body.rate,
+                    location:req.body.location
                 });
                
                 obj.save()

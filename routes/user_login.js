@@ -90,4 +90,11 @@ router.get("/unregister",verify,(req,res,next)=>{
 
 
 
+
+router.get("/login",(req,res,next)=>{
+    res.json({
+        message:"Please login to continue"
+    });
+});
+
 module.exports = router;
