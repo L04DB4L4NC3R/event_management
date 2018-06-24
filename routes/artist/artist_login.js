@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const users = require("../db/model").users;
-const artists = require("../db/model").artists;
+const users = require("../../db/model").users;
+const artists = require("../../db/model").artists;
 const jwt = require("jsonwebtoken");
-const hash = require("../helpers/hash").hash;
-const compare = require("../helpers/hash").compare;
-const verify = require("../helpers/jwt");
+const hash = require("../../helpers/hash").hash;
+const compare = require("../../helpers/hash").compare;
+const verify = require("../../helpers/jwt");
 
 
 
@@ -71,7 +71,8 @@ router.post("/login", async (req,res,next)=>{
                     type:req.body.type,
                     rate:req.body.rate,
                     location:req.body.location,
-                    rating:0
+                    rating:0,
+                    rated_users:0
                 });
                
                 obj.save()

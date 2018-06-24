@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const verify = require("../helpers/jwt");
-const artists = require("../db/model").artists;
-const users = require("../db/model").users;
+const verify = require("../../helpers/jwt");
+const artists = require("../../db/model").artists;
+const users = require("../../db/model").users;
 
 /*
 *   @body: {
@@ -28,7 +28,7 @@ router.post("/search",verify,(req,res,next)=>{
 
 
 /*
-*   @body: {
+*    {
 *   name:String,
 *   description:String,
 *   artist:String,

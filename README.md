@@ -26,3 +26,4 @@ ___
 | /user/main | - | POST | optional {rate:"1000-2000",rating:5} |  { data: [ {name:String,type:String,bookings:[booking]rate:Number,location:String,rating:Number} ]  }|
 | /user/cart | Authorization | POST | {name:String,description:String,artist:String,id:String,date:dd/mm/yy,time:String,address:String} | {message:"artist has been added to cart"}|
 | /user/cart | Authorization | GET | - | {data:[ {name:String,description:String,artist:String,id:String,date:dd/mm/yy,time:String,address:String}, ]} |
+| /user/rate | Authorization | POST | {id:"Artist ID,rating:Number} | {rating:User rating Number} | 

@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const users = require("../db/model").users;
+const users = require("../../db/model").users;
 const jwt = require("jsonwebtoken");
-const hash = require("../helpers/hash").hash;
-const compare = require("../helpers/hash").compare;
-const verify = require("../helpers/jwt");
+const hash = require("../../helpers/hash").hash;
+const compare = require("../../helpers/hash").compare;
+const verify = require("../../helpers/jwt");
 
 
 
