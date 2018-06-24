@@ -70,7 +70,8 @@ router.post("/login", async (req,res,next)=>{
                     bookings:[],
                     type:req.body.type,
                     rate:req.body.rate,
-                    location:req.body.location
+                    location:req.body.location,
+                    rating:0
                 });
                
                 obj.save()

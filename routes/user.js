@@ -85,16 +85,116 @@ router.get("/delete/:id",verify,(req,res,next)=>{
  *  @description List of artists format-
  * 
  *      data:[
- *              {name:String, etc}
+ *              {rate:String, rating:Number}
  *              ]
  */
 
-router.get("/main",(req,res,next)=>{
-    artists.find({},{passwd:0})
-    .then((data)=>{
-        res.json({data});
-    }).catch(err=>next(err));
+router.post("/main",(req,res,next)=>{
+
+    if(req.body.rate && req.body.rating){
+        var rate =  req.body.rate.split("-");
+        var lower = parseInt(rate[0]);
+        var upper = parseInt(rate[1]);
+    
+        artists.find({},{passwd:0})
+        .where('rating',req.body.rating)
+        .where('rate').gte(lower).lte(upper)
+        .exec((err,data)=>{
+            if(err) next(err);
+            else res.json({data});
+        });
+    }
+
+    else if(req.body.rate){
+        var rate =  req.body.rate.split("-");
+        var lower = parseInt(rate[0]);
+        var upper = parseInt(rate[1]);
+        
+        artists.find({},{passwd:0})
+        .where('rate').gte(lower).lte(upper)
+        .exec((err,data)=>{
+            if(err) next(err);
+            else res.json({data});
+        });
+    }
+
+    else if(req.body.rating){
+        artists.find({},{passwd:0})
+        .where('rating',req.body.rating)
+        .exec((err,data)=>{
+            if(err) next(err);
+            else res.json({data});
+        });
+    }
+
+    else{
+        artists.find({},{passwd:0})
+       .then(data=>res.json({data}))
+       .catch(err=>next(err));
+    }
 });
+
+
+
+
+
+/**
+ * @description Cart: from here you can remove and add artists
+ * 
+ * data: 
+ *  {
+*   name:String,
+*   description:String,
+*   artist:String,
+*   id:String,
+*   date:dd/mm/yy,
+*   time:String,
+*   address:String
+*    } 
+ * 
+ */
+
+router.post("/cart",verify,async (req,res,next)=>{
+    
+    var id = req.data.user._id;
+    
+    var artist = await artists.findOne({name:req.body.artist})
+
+    if(artist){
+        for(booking of artist.bookings){   
+            if(booking.date === req.body.date && booking.time === req.body.time)
+                return next("Artist is booked for the entered date and time");
+        }
+    
+        await users.update({_id:id},{$push:{cart:req.body}});
+        //await artists.update({name:req.body.artist},{$push:{bookings:{user:id,description:req.body.description,date:req.body.date,time:req.body.time,address:req.body.address}}});
+        return res.json({message:"Artist is added to cart"});
+    }
+    else 
+        next("Artist not found");
+});
+
+
+
+
+/**
+ * @description View cart
+ */
+
+ router.get("/cart",verify,(req,res,next)=>{
+    
+    var id = req.data.user._id;
+
+    users.findOne({_id:id},{passwd:0})
+    .then(data=>res.json({data:data.cart}))
+    .catch(err=>next(err));
+ 
+ });
+
+
+
+
+
 
 
 module.exports = router;

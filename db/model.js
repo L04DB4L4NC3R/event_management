@@ -18,7 +18,8 @@ const event = new mongoose.Schema({
 const schema = new mongoose.Schema({
     name:String,
     passwd:String,
-    events:[event]
+    events:[event],
+    cart:[event]
 });
 
 
@@ -43,7 +44,8 @@ const artists = new mongoose.Schema({
     type:String,
     bookings:[booking],
     rate:Number,
-    location:String
+    location:String,
+    rating:Number
 
 });
 
@@ -53,3 +55,7 @@ const art = mongoose.model("artist",artists);
 
 module.exports.users = model;
 module.exports.artists = art;
+
+
+
+

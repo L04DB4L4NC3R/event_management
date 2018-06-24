@@ -23,4 +23,6 @@ ___
 | /user/delete/:id |        Authorization|        GET |  id of artist as GET parameter | {message:"Event booking is cancelled"} |
 | /user/unregister | Authorization | GET |  -  | redirected to welcome page |
 | /artist/unregister | Authorization | GET |  -  | redirected to welcome page  |
-| /user/main | - | GET | - |  { data: [ {name:String,type:String,bookings:[booking]rate:Number,location:String} ]  }|
+| /user/main | - | POST | optional {rate:"1000-2000",rating:5} |  { data: [ {name:String,type:String,bookings:[booking]rate:Number,location:String,rating:Number} ]  }|
+| /user/cart | Authorization | POST | {name:String,description:String,artist:String,id:String,date:dd/mm/yy,time:String,address:String} | {message:"artist has been added to cart"}|
+| /user/cart | Authorization | GET | - | {data:[ {name:String,description:String,artist:String,id:String,date:dd/mm/yy,time:String,address:String}, ]} |
