@@ -44,7 +44,8 @@ router.post("/login", async (req,res,next)=>{
     *           passwd:String,
     *           type:String,
     *           rate:Number,
-    *           location:String
+    *           location:String,
+    *           city:String
     *           }   
      */
 
@@ -71,6 +72,7 @@ router.post("/login", async (req,res,next)=>{
                     type:req.body.type,
                     rate:req.body.rate,
                     location:req.body.location,
+                    city:req.body.city,
                     rating:0,
                     rated_users:0
                 });

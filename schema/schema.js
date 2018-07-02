@@ -46,6 +46,7 @@ const ArtistType = new GraphQLObjectType({
         rate:{type:GraphQLFloat},
         rating:{type:GraphQLFloat},
         rated_users:{type:GraphQLInt},
+        city:{type:GraphQLString},
         bookings:{
             type:new GraphQLList(BookingType),
             resolve(parent,args){

@@ -34,4 +34,20 @@ const users = require("../../db/model").users;
  });
 
 
+
+ /**
+  * @description Search according to city
+  * 
+  * {
+  *     city:String
+  * }
+  */
+
+  router.get("/search/:city",(req,res,next)=>{
+      artists.find({city:req.params.city},{passwd:0,bookings:0})
+      .then((c)=>{
+          res.json({data:c});
+      }).catch(err=>next(err));
+  });
+
  module.exports = router;

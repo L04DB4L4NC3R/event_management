@@ -40,6 +40,7 @@ const booking = new mongoose.Schema({
 
 const artists = new mongoose.Schema({
     name:String,
+    city:String,
     passwd:String,
     type:String,
     bookings:[booking],

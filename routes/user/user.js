@@ -3,8 +3,10 @@ const verify = require("../../helpers/jwt");
 const artists = require("../../db/model").artists;
 const users = require("../../db/model").users;
 
-/*
-*   @body: {
+/** 
+*   @description Search according to name or type
+*    
+*    {
 *       query:String
 *    } 
 */
