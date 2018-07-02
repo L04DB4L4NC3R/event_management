@@ -136,7 +136,21 @@ const ArtistType = new GraphQLObjectType({
              resolve(parent,args){
                  return Users.find({});
              }
-         }
+         },
+         artist:{
+             type:ArtistType,
+             args:{id:{type:GraphQLID}},
+             resolve(parent,args){
+                 return Artists.findById(args.id);
+             }
+         },
+         user:{
+            type: UserType,
+            args:{id:{type:GraphQLID}},
+            resolve(parent,args){
+                return Users.findById(args.id);
+            }
+        }
      })
  })
 

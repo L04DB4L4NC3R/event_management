@@ -5,6 +5,7 @@ const graphqlHTTP = require("express-graphql");
 const schema = require("./schema/schema");
 
 require("dotenv").config();
+const verify = require("./helpers/jwt");
 require("./db/connect");
 
 const app = express();
@@ -15,7 +16,7 @@ app.use(body_parser.json());
 app.use(body_parser.urlencoded({extended:false}));
 
 //graphql
-app.use("/graphql",graphqlHTTP({
+app.use("/graphql",verify,graphqlHTTP({
     schema,
     graphiql:true
 }));
