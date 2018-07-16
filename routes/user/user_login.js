@@ -4,7 +4,11 @@ const jwt = require("jsonwebtoken");
 const hash = require("../../helpers/hash").hash;
 const compare = require("../../helpers/hash").compare;
 const verify = require("../../helpers/jwt");
+const util=require('util');
+jwt.sign=util.promisify(jwt.sign);
+const passport=require('passport');
 
+require('dotenv').config();
 
 
 
@@ -19,7 +23,7 @@ router.post("/login", async (req,res,next)=>{
     
         if(user && bool )
             {
-                jwt.sign({user},process.env.SECRET_KEY,(err,token)=>{
+                jwt.sign({id:user.id},process.env.SECRET_KEY,(err,token)=>{
                     if(err)
                         next(err)
                     console.log(token);
@@ -97,4 +101,6 @@ router.get("/login",(req,res,next)=>{
     });
 });
 
+
 module.exports = router;
+
